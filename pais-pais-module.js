@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button text=\"\" color=\"light\" defaultHref=\"/tabs/tab2\"></ion-back-button>\n    </ion-buttons>\n    <ion-title *ngIf=\"dadesPais\">{{ dadesPais[0].Country }}</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ng-container *ngIf=\"dadesPais\">\n    <ion-card *ngFor=\"let pais of dadesPais\">\n      <ion-card-header>\n        <ion-card-subtitle>{{ pais.Country }}</ion-card-subtitle>\n        <ion-card-title>{{ pais.Date }}</ion-card-title>\n      </ion-card-header>\n      <ion-card-content>\n        Confirmed: {{ pais.Confirmed }} <br>\n        Deaths: {{ pais.Deaths }} <br>\n        Recovered: {{ pais.Recovered }} <br>\n        Active: {{ pais.Active }}\n      </ion-card-content>\n    </ion-card>\n  </ng-container>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-back-button text=\"\" color=\"light\" defaultHref=\"/tabs/tab2\"></ion-back-button>\n    </ion-buttons>\n    <ion-title *ngIf=\"dadesPais != null\">{{ dadesPais[0].Country }}</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ng-container *ngIf=\"dadesPais != null\">\n    <ion-card *ngFor=\"let pais of dadesPais\">\n      <ng-container *ngIf=\"pais\">\n        <ion-card-header>\n          <ion-card-subtitle>{{ pais.Country }}</ion-card-subtitle>\n          <ion-card-title>{{ pais.Date }}</ion-card-title>\n        </ion-card-header>\n        <ion-card-content>\n          Confirmed: {{ pais.Confirmed }} <br>\n          Deaths: {{ pais.Deaths }} <br>\n          Recovered: {{ pais.Recovered }} <br>\n          Active: {{ pais.Active }}\n        </ion-card-content>\n      </ng-container>\n    </ion-card>\n  </ng-container>\n\n  <ng-container *ngIf=\"dadesPais == null\">\n    <ion-card>\n      <ng-container>\n        <ion-card-header>\n          <ion-card-title>Information is not avaiable</ion-card-title>\n        </ion-card-header>\n      </ng-container>\n    </ion-card>\n  </ng-container>\n</ion-content>\n");
 
 /***/ }),
 
@@ -76,12 +76,16 @@ let PaisPage = class PaisPage {
     constructor(activatedRoute, dades) {
         this.activatedRoute = activatedRoute;
         this.dades = dades;
+        this.dadesPais = null;
     }
     ngOnInit() {
         const title = this.activatedRoute.snapshot.paramMap.get('id');
         const decodedTitle = decodeURIComponent(title);
         this.dades.dadesPais(decodedTitle).subscribe((data) => {
-            this.dadesPais = data;
+            if (data[0] != null) {
+                this.dadesPais = data;
+                this.dadesPais = this.dadesPais.reverse();
+            }
         });
     }
 };

@@ -390,15 +390,15 @@ let DataServiceService = class DataServiceService {
         this.http = http;
     }
     dadesGlobals() {
-        const apiURL = "https://api.covid19api.com/summary";
+        const apiURL = 'https://api.covid19api.com/summary';
         return this.http.get(apiURL);
     }
     totsPaisos() {
-        const apiURL = "https://api.covid19api.com/countries";
+        const apiURL = 'https://api.covid19api.com/countries';
         return this.http.get(apiURL);
     }
     dadesPais(pais) {
-        const apiURL = "https://api.covid19api.com/country/" + pais;
+        const apiURL = 'https://api.covid19api.com/country/' + pais;
         return this.http.get(apiURL);
     }
 };
