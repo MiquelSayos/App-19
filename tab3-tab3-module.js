@@ -29,11 +29,13 @@ let Tab3Page = class Tab3Page {
         this.searchTerm = '';
     }
     searchEventFired() {
-        this.dades.dadesPais(this.searchTerm).subscribe((data) => {
-            if (data) {
-                this.results = data[0].Country;
-            }
-        });
+        if (this.dades.dadesPais(this.searchTerm)) {
+            this.dades.dadesPais(this.searchTerm).subscribe((data) => {
+                if (data) {
+                    this.results = data[0].Country;
+                }
+            });
+        }
     }
     infoPais(pais) {
         const titleEscaped = encodeURIComponent(pais);
@@ -102,7 +104,7 @@ Tab3PageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header [translucent]=\"true\">\n  <ion-toolbar>\n    <ion-title>\n      Tab 3\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <!-- Search Bar -->\n  <ion-row >\n    <ion-col size=\"12\">\n      <ion-searchbar animated placeholder=\"Find country\" [(ngModel)]=\"searchTerm\" (ionChange)=\"searchEventFired()\"></ion-searchbar>\n    </ion-col>\n  </ion-row>\n  <!-- Results -->\n  <ion-row >\n    <ion-col size=\"12\" *ngIf=\"results\" tappable (click)=\"infoPais(results)\">\n      <h2 class=\"search\">{{ results }}</h2>\n    </ion-col>\n  </ion-row>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header [translucent]=\"true\">\n  <ion-toolbar>\n    <ion-title>\n      Search\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [fullscreen]=\"true\">\n  <!-- Search Bar -->\n  <ion-row >\n    <ion-col size=\"12\">\n      <ion-searchbar animated placeholder=\"Find country\" [(ngModel)]=\"searchTerm\" (ionChange)=\"searchEventFired()\"></ion-searchbar>\n    </ion-col>\n  </ion-row>\n  <!-- Results -->\n  <ion-row >\n    <ion-col size=\"12\" *ngIf=\"results\" tappable (click)=\"infoPais(results)\">\n      <h2 class=\"search\">{{ results }}</h2>\n    </ion-col>\n  </ion-row>\n</ion-content>\n");
 
 /***/ }),
 
